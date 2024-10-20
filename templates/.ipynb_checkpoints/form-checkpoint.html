@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vastu Compliance Prediction</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for styling -->
+    <style>
+        
+        .container {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #343a40;
+            font-weight: bold;
+            font-size: 28px;
+        }
+        label {
+            color: #495057;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .form-group input, .form-group select {
+            border-radius: 15px;
+            border: 1px solid #ced4da;
+            padding: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 15px;
+        }
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border-radius: 25px;
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            border: none;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: #007bff; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <h2 class="card-title">Vastu Compliance Prediction</h2>
+                    <p class="text-center">Enter the home details to predict its Vastu compliance</p>
+                    
+                    <form action="/predict" method="post">
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <!-- Direction of Main Entrance -->
+                                <div class="form-group">
+                                    <label for="entrance_direction">Direction of Main Entrance</label>
+                                    <select class="form-control" name="entrance_direction" id="entrance_direction" required>
+                                        <option value="">Select Direction</option>
+                                        <option value="North">North</option>
+                                        <option value="South">South</option>
+                                        <option value="East">East</option>
+                                        <option value="West">West</option>
+                                    </select>
+                                </div>
+
+                                <!-- Position of Kitchen -->
+                                <div class="form-group">
+                                    <label for="kitchen_position">Position of Kitchen</label>
+                                    <select class="form-control" name="kitchen_position" id="kitchen_position" required>
+                                        <option value="">Select Position</option>
+                                        <option value="North-East">North-East</option>
+                                        <option value="South-West">South-West</option>
+                                        <option value="North-West">North-West</option>
+                                        <option value="South-East">South-East</option>
+                                    </select>
+                                </div>
+
+                                <!-- Position of Bedroom -->
+                                <div class="form-group">
+                                    <label for="bedroom_position">Position of Bedroom</label>
+                                    <select class="form-control" name="bedroom_position" id="bedroom_position" required>
+                                        <option value="">Select Position</option>
+                                        <option value="North-East">North-East</option>
+                                        <option value="South-West">South-West</option>
+                                        <option value="North-West">North-West</option>
+                                        <option value="South-East">South-East</option>
+                                    </select>
+                                </div>
+
+                                <!-- Plot Shape -->
+                                <div class="form-group">
+                                    <label for="plot_shape">Plot Shape</label>
+                                    <select class="form-control" name="plot_shape" id="plot_shape" required>
+                                        <option value="">Select Shape</option>
+                                        <option value="Square">Square</option>
+                                        <option value="Rectangle">Rectangle</option>
+                                        <option value="Irregular">Irregular</option>
+                                    </select>
+                                </div>
+
+                                <!-- Floor Number -->
+                                <div class="form-group">
+                                    <label for="floor_number">Floor Number</label>
+                                    <input type="number" class="form-control" name="floor_number" id="floor_number" placeholder="Enter floor number" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <!-- Is There an Open Space in the North-East? -->
+                                <div class="form-group">
+                                    <label for="open_space_ne">Is There an Open Space in the North-East?</label>
+                                    <select class="form-control" name="open_space_ne" id="open_space_ne" required>
+                                        <option value="">Select Yes/No</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <!-- Water Source in North-East -->
+                                <div class="form-group">
+                                    <label for="water_source_ne">Water Source in North-East</label>
+                                    <select class="form-control" name="water_source_ne" id="water_source_ne" required>
+                                        <option value="">Select Yes/No</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <!-- Presence of Heavy Objects in South-West -->
+                                <div class="form-group">
+                                    <label for="heavy_objects_sw">Presence of Heavy Objects in South-West</label>
+                                    <select class="form-control" name="heavy_objects_sw" id="heavy_objects_sw" required>
+                                        <option value="">Select Yes/No</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <!-- House Area (sq ft) -->
+                                <div class="form-group">
+                                    <label for="house_area">House Area (sq ft)</label>
+                                    <input type="number" class="form-control" name="house_area" id="house_area" placeholder="Enter house area" required>
+                                </div>
+
+                                <!-- Road Facing -->
+                                <div class="form-group">
+                                    <label for="road_facing">Road Facing</label>
+                                    <select class="form-control" name="road_facing" id="road_facing" required>
+                                        <option value="">Select Direction</option>
+                                        <option value="North">North</option>
+                                        <option value="South">South</option>
+                                        <option value="East">East</option>
+                                        <option value="West">West</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-custom btn-block mt-3">Predict Vastu Compliance</button>
+                    </form>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                        <div class="result">
+                            <h2>Prediction Result: {{ prediction_result }}</h2>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
